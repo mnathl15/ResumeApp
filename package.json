@@ -5,11 +5,19 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:css": "tailwind build style.css -o static/style.css",
     "start": "next start"
   },
   "dependencies": {
+    "@aws-amplify/cli": "^4.41.0",
+    "@aws-amplify/ui-react": "^0.2.33",
+    "autoprefixer": "^10.1.0",
+    "aws-amplify": "^3.3.13",
+    "email-regex": "^4.0.0",
     "next": "^10.0.0",
+    "postcss": "^8.2.2",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "tailwindcss": "^2.0.2"
   }
 }

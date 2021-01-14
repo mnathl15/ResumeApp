@@ -1,0 +1,43 @@
+{
+    "paths": [
+        {
+            "name": "/sendresumetext",
+            "lambdaFunction": "resumefunc",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/sendresumetext"
+        },
+        {
+            "name": "/getresumes",
+            "lambdaFunction": "resumefunc",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "resumeapi",
+    "apiName": "resumeapi",
+    "functionArns": [
+        {
+            "lambdaFunction": "resumefunc"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-resumeapp-dev-201239-authRole",
+        "unAuthRoleName": "amplify-resumeapp-dev-201239-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "resumefunc",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "eee02d5f"
+}
