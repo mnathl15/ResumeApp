@@ -1,0 +1,5 @@
+{
+    "tableName": "resumetable2",
+    "partitionKeyName": "resumeId",
+    "partitionKeyType": "S"
+}

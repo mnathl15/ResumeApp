@@ -11,6 +11,10 @@
     "resumetable": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
+    },
+    "resumetable2": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
     }
   },
   "function": {

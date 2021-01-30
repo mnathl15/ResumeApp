@@ -69,7 +69,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-resumeapp-dev-201239-deployment",
-          "S3Key": "amplify-builds/resumefunc-64426838464e69445a54-build.zip"
+          "S3Key": "amplify-builds/resumefunc-53564d37304148664375-build.zip"
         }
       }
     },

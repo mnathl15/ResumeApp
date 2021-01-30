@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      flex: (theme) => ({
+        "2-row": "1 0 50%",
+      }),
       colors: {
         blue: {
           50: "#F0F6F9",

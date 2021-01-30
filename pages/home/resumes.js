@@ -1,35 +1,25 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ResumeFrame from "../../components/ResumeFrame";
-import UserContext from "../../UserContext";
-import { getResumes } from "../../utils/resume_submit";
-import Link from "next/link";
+import ResumeContext from "../../ResumeContext";
 
 export default function Resumes() {
-  const [resumes, setResumes] = useState();
-
-  useEffect(() => {
-    const retrieveResumes = async () => {
-      const resumes = await getResumes();
-      setResumes(resumes);
-    };
-    retrieveResumes();
-  }, []);
+  const resumeContext = useContext(ResumeContext);
 
   const showResumes = () => {
-    return resumes.map((resume, key) => {
-      return <ResumeFrame key={key} user={resume} />;
-    });
+    try {
+      return resumeContext.resumes.map((resume, key) => {
+        return <ResumeFrame key={key} resume={resume} />;
+      });
+    } catch (error) {
+      console.warn(error);
+    }
   };
 
   return (
-    <UserContext.Consumer>
-      {(userContext) => {
-        return (
-          <div className="w-100 flex flex-wrap py-5 ">
-            {!!resumes && showResumes()}
-          </div>
-        );
-      }}
-    </UserContext.Consumer>
+    <div className="h-full flex flex-col justify-center">
+      <div className="w-4/6 h-4/6 mb-20 overflow-auto  mx-auto flex flex-wrap">
+        {!!resumeContext && showResumes()}
+      </div>
+    </div>
   );
 }

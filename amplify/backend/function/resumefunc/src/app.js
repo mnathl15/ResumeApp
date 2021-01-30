@@ -10,7 +10,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
 
-const TABLE_NAME = "resumetable-dev";
+const TABLE_NAME = "resumetable2-dev";
 // declare a new express app
 var app = express();
 app.use(bodyParser.json());
@@ -57,6 +57,7 @@ app.post("/sendresumetext", function(req, res) {
       resumeId: req.body.resumeId,
       email: req.body.email,
       text: req.body.text,
+      comments: req.body.comments,
     },
   };
   docClient.put(params, function(err, data) {
@@ -65,6 +66,32 @@ app.post("/sendresumetext", function(req, res) {
   });
 });
 
+app.post("/addcomment", function(req, res) {
+  var params = {
+    TableName: TABLE_NAME,
+    Key: {
+      resumeId: req.body.resumeId,
+    },
+    UpdateExpression: "SET #attrName = list_append(#attrName,:attrValue)",
+    ExpressionAttributeNames: {
+      "#attrName": "comments",
+    },
+    ExpressionAttributeValues: {
+      ":attrValue": [
+        {
+          author: req.body.comments.author,
+          text: req.body.comments.text,
+        },
+      ],
+    },
+    ReturnValues: "UPDATED_NEW",
+  };
+
+  docClient.update(params, function(err, data) {
+    if (err) res.json({ err });
+    else res.json({ success: "Contact created successfully!" });
+  });
+});
 app.post("/sendresumetext/*", function(req, res) {
   // Add your code here
   res.json({ success: "post call succeed!", url: req.url, body: req.body });

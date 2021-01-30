@@ -5,39 +5,37 @@ import UserProvider from "../../UserProvider";
 import UserContext from "../../UserContext";
 import Link from "next/link";
 import { resumeSubmitText } from "../../utils/resume_submit";
+
+import { Editor, EditorState } from "draft-js";
+import "draft-js/dist/Draft.css";
+import TextEditor from "../../components/TextEditor";
+
 export default function Upload() {
-  const [resumeText, setResumeText] = useState();
+  const [editorData, setEditorData] = useState({});
 
   return (
     <UserContext.Consumer>
       {(userContext) => {
         return (
-          <div className="w-100 text-center">
-            <div className="my-10 w-30">
-              <h1 className="text-3xl">
-                How would you like to upload your resume?{" "}
-              </h1>
-              <hr className="w-100" />
-            </div>
-            <div className="w-100 flex flex-row justify-around">
-              <div>
-                <h1 className="text-2xl"> Write it here!</h1>
-                <input
-                  type="text"
-                  value={resumeText}
-                  onChange={(e) => setResumeText(e.target.value)}
-                  className="h-80 w-60"
-                />
-                <Button
-                  onClick={() => resumeSubmitText(userContext.user, resumeText)}
-                  text="Submit resume"
-                />
+          <div className="w-full text-center h-full overflow-auto">
+            <div className="h-5/6 flex flex-col justify-around">
+              <div className="my-10 w-30 h-5/6">
+                <h1 className="text-3xl">
+                  Type/Copy and Paste your resume below!
+                </h1>
+                <div className="my-10 h-5/6">
+                  <TextEditor
+                    setEditorData={(editorData) => setEditorData(editorData)}
+                    width="60%"
+                  />
+                </div>
               </div>
 
-              <div>
-                <h1 className="text-2xl"> Upload</h1>
-                <p>Coming soon</p>
-              </div>
+              <Button
+                onClick={() => resumeSubmitText(userContext.user, editorData)}
+                text="Submit resume"
+                width="w-72"
+              />
             </div>
           </div>
         );
